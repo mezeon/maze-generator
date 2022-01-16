@@ -2,7 +2,6 @@ from random import randint as r
 from sys import argv
 from PIL import Image
 
-exit = False
 blocks = set()
 
 try: size = int(argv[1])
