@@ -20,10 +20,8 @@ img.putpixel((size // 2, 1), 1)
 last_step = [size // 2, 1]
 for i in range(offshoots):
     last_step = (r(0, size - 1), r(0, size - 1))
-    try:
-        while img.getpixel(last_step) != 1:
-            last_step = (r(0, size - 1), r(0, size - 1))
-    except: print(last_step)
+    while img.getpixel(last_step) != 1:
+        last_step = (r(0, size - 1), r(0, size - 1))
     while last_step[1] != size:
         # 0 - left, 1 - top, 2 - right, 3 - bottom
         # coordinates are starting from upper left corner
@@ -54,10 +52,8 @@ for i in range(offshoots):
         
         if len(blocks) == 4:
             last_step = (r(0, size - 1), r(0, size - 1))
-            try:
-                while img.getpixel(last_step) != 1:
-                    last_step = (r(0, size - 1), r(0, size - 1))
-            except: print(last_step)
+            while img.getpixel(last_step) != 1:
+                last_step = (r(0, size - 1), r(0, size - 1))
     
 img = img.crop((0, 0, size, size + 1))
 for i in range(size):
