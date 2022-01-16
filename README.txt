@@ -1,5 +1,4 @@
 Author: Mezeon (Jakub) <mezeon@int.pl>
-Author's Github: https://github.com/mezeon
 
 Version: 1.0.0
 Date: 16-01-2022
