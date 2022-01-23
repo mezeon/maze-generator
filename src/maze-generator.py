@@ -23,48 +23,57 @@ for w in range(size + 2):
 maze[size // 2][0] = 1
 maze[size // 2][1] = 1
 
-last_step = [size // 2, 1]
 for i in range(offshoots):
-    last_step = (r(0, size - 1), r(0, size - 1))
-    while maze[last_step[0]][last_step[1]] != 1:
-        last_step = (r(0, size - 1), r(0, size - 1))
-    while last_step[1] != size - 2:
+    last_stepX = r(0, size - 3)
+    last_stepY = r(0, size - 3)
+    while maze[last_stepX][last_stepY] != 1:
+        last_stepX = r(0, size - 3)
+        last_stepY = r(0, size - 3)
+
+    while last_stepY != size - 1:
         # 0 - left, 1 - top, 2 - right, 3 - bottom
         # coordinates are starting from the upper left corner
         direction = r(0, 3)
     
-        if (direction == 0) and (maze[last_step[0] - 1][last_step[1] - 1] == 0) and (maze[last_step[0] - 2][last_step[1] - 1] == 0) and (maze[last_step[0] - 2][last_step[1]] == 0) and (maze[last_step[0] - 2][last_step[1] + 1] == 0) and (maze[last_step[0] - 1][last_step[1] + 1] == 0) and (last_step[0] - 1 > 0):
-            last_step = (last_step[0] - 1, last_step[1])
-            maze[last_step[0]][last_step[1]] = 1
+        if (direction == 0) and (maze[last_stepX - 1][last_stepY - 1] == 0) and (maze[last_stepX - 2][last_stepY - 1] == 0) and (maze[last_stepX - 2][last_stepY] == 0) and (maze[last_stepX - 2][last_stepY + 1] == 0) and (maze[last_stepX - 1][last_stepY + 1] == 0) and (last_stepX - 1 > 0):
+            last_stepX -= 1
+            maze[last_stepX][last_stepY] = 1
             blocks = set()
 
-        elif (direction == 1) and (maze[last_step[0] - 1][last_step[1] - 1] == 0) and (maze[last_step[0] - 1][last_step[1] - 2] == 0) and (maze[last_step[0]][last_step[1] - 2] == 0) and (maze[last_step[0] + 1][last_step[1] - 2] == 0) and (maze[last_step[0] + 1][last_step[1] - 1] == 0) and (last_step[1] - 1 > 0):
-            last_step = (last_step[0], last_step[1] - 1)
-            maze[last_step[0]][last_step[1]] = 1
+        elif (direction == 1) and (maze[last_stepX - 1][last_stepY - 1] == 0) and (maze[last_stepX - 1][last_stepY - 2] == 0) and (maze[last_stepX][last_stepY - 2] == 0) and (maze[last_stepX + 1][last_stepY - 2] == 0) and (maze[last_stepX + 1][last_stepY - 1] == 0) and (last_stepY - 1 > 0):
+            last_stepY -= 1
+            maze[last_stepX][last_stepY] = 1
             blocks = set()
 
-        elif (direction == 2) and (maze[last_step[0] + 1][last_step[1] - 1] == 0) and (maze[last_step[0] + 2][last_step[1] - 1] == 0) and (maze[last_step[0] + 2][last_step[1]] == 0) and (maze[last_step[0] + 2][last_step[1] + 1] == 0) and (maze[last_step[0] + 1][last_step[1] + 1] == 0) and (last_step[0] + 1 < size - 1):
-            last_step = (last_step[0] + 1, last_step[1])
-            maze[last_step[0]][last_step[1]] = 1
+        elif (direction == 2) and (maze[last_stepX + 1][last_stepY - 1] == 0) and (maze[last_stepX + 2][last_stepY - 1] == 0) and (maze[last_stepX + 2][last_stepY] == 0) and (maze[last_stepX + 2][last_stepY + 1] == 0) and (maze[last_stepX + 1][last_stepY + 1] == 0) and (last_stepX + 1 < size - 1):
+            last_stepX += 1
+            maze[last_stepX][last_stepY] = 1
             blocks = set()
 
-        elif (direction == 3) and (maze[last_step[0] - 1][last_step[1] + 1] == 0) and (maze[last_step[0] - 1][last_step[1] + 2] == 0) and (maze[last_step[0]][last_step[1] + 2] == 0) and (maze[last_step[0] + 1][last_step[1] + 2] == 0) and (maze[last_step[0] + 1][last_step[1] + 1] == 0) and (last_step[1] + 1 < size - 1):
-            last_step = (last_step[0], last_step[1] + 1)
-            maze[last_step[0]][last_step[1]] = 1
+        elif (direction == 3) and (maze[last_stepX - 1][last_stepY + 1] == 0) and (maze[last_stepX - 1][last_stepY + 2] == 0) and (maze[last_stepX][last_stepY + 2] == 0) and (maze[last_stepX + 1][last_stepY + 2] == 0) and (maze[last_stepX + 1][last_stepY + 1] == 0):
+            last_stepY += 1
+            maze[last_stepX][last_stepY] = 1
             blocks = set()
 
         else:
             blocks.add(direction)
         
         if len(blocks) == 4:
-            last_step = (r(0, size - 1), r(0, size - 1))
-            while maze[last_step[0]][last_step[1]] != 1:
-                last_step = (r(0, size - 1), r(0, size - 1))
+            last_stepX = r(0, size - 1)
+            last_stepY = r(0, size - 1)
+            while maze[last_stepX][last_stepY] != 1:
+                last_stepX = r(0, size - 1)
+                last_stepY = r(0, size - 1)
 
-exit_coordinates = (r(0, size - 1), size - 2)
-while maze[exit_coordinates[0]][exit_coordinates[1]] != 1:
-    exit_coordinates = (r(0, size - 1), size - 2)
-maze[exit_coordinates[0]][exit_coordinates[1] + 1] = 1
+for i in range(size):
+    maze[i][size - 1] = 0
+
+exit_coordinateX = r(0, size - 1)
+exit_coordinateY = size - 2
+while maze[exit_coordinateX][exit_coordinateY] != 1:
+    exit_coordinateX = r(0, size - 1)
+    exit_coordinateY = size - 2
+maze[exit_coordinateX][exit_coordinateY + 1] = 1
 
 img = Image.new('1', (size, size))
 for w in range(size):
